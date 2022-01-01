@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "./transaction.dart";
+import '../model/transaction.dart';
 
 class transaclist extends StatelessWidget {
   final List<transaction> tra;
@@ -10,8 +10,8 @@ class transaclist extends StatelessWidget {
     return Column(
       children: tra.map((val) {
         return Card(
-          margin: EdgeInsets.all(8),
-          elevation: 18,
+          margin: EdgeInsets.all(6),
+          elevation: 5,
           shadowColor: Colors.blue,
           color: Colors.white,
           child: Row(
@@ -19,9 +19,11 @@ class transaclist extends StatelessWidget {
               Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Colors.purple)),
+                      border: Border.all(color: Colors.purple, width: 4)),
                   width: 100,
-                  child: Text(val.amount,
+                  height: 30,
+                  padding: EdgeInsets.all(4),
+                  child: Text(val.amount.toStringAsFixed(2),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black,
