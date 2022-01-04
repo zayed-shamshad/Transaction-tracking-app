@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 import '../model/transaction.dart';
+import 'package:intl/intl.dart';
 
 class transaclist extends StatelessWidget {
   final List<transaction> tra;
-  transaclist(this.tra);
+  final Function del;
+  transaclist(this.tra, this.del);
 
   @override
   Widget build(BuildContext context) {
@@ -14,26 +16,31 @@ class transaclist extends StatelessWidget {
           elevation: 5,
           shadowColor: Colors.blue,
           color: Colors.white,
-          child: Row(
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.purple, width: 4)),
-                  width: 100,
-                  height: 30,
-                  padding: EdgeInsets.all(4),
+          child: ListTile(
+              leading: CircleAvatar(
+                  radius: 28,
                   child: Text(val.amount.toStringAsFixed(2),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                       ))),
-              Column(children: [
-                Container(child: Card(child: Text(val.title)), width: 100),
-                Container(child: Card(child: Text(val.Date)), width: 100)
-              ])
-            ],
-          ),
+              title: Container(
+                  child: Card(
+                      child: Text(val.title,
+                          style: TextStyle(color: Colors.black))),
+                  width: 100),
+              subtitle: Container(
+                  child: Card(
+                      child: Text(DateFormat.yMd().format(val.dat),
+                          style: TextStyle(color: Colors.grey))),
+                  width: 100),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  del(val.id);
+                },
+                color: Colors.red,
+              )),
         );
       }).toList(),
     );
